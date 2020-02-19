@@ -3,6 +3,7 @@ from torch.utils.data import Dataset
 import cv2
 from PIL import Image
 from data.imgaug import GetTransforms
+import os
 
 np.random.seed(0)
 
@@ -102,7 +103,7 @@ class ImageDataset(Dataset):
         return image
 
     def __getitem__(self, idx):
-        image = cv2.imread(self._image_paths[idx], 0)
+        image = cv2.imread(os.path.join('/mnt/vol12/suga/datasets/public/medimg', self._image_paths[idx]), 0)
         image = Image.fromarray(image)
         if self._mode == 'train':
             image = GetTransforms(image, type=self.cfg.use_transforms_type)
