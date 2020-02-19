@@ -170,14 +170,14 @@ def train_epoch(summary, summary_dev, cfg, args, model, dataloader,
 
             for t in range(len(cfg.num_classes)):
                 summary_writer.add_scalar(
-                    'dev/loss_{}'.format(dev_header[t]),
+                    'dev/loss_{}'.format(dev_header[t]).replace(' ', '_'),
                     summary_dev['loss'][t], summary['step'])
                 summary_writer.add_scalar(
-                    'dev/acc_{}'.format(dev_header[t]), summary_dev['acc'][t],
-                    summary['step'])
+                    'dev/acc_{}'.format(dev_header[t]).replace(' ', '_'),
+                    summary_dev['acc'][t], summary['step'])
                 summary_writer.add_scalar(
-                    'dev/auc_{}'.format(dev_header[t]), summary_dev['auc'][t],
-                    summary['step'])
+                    'dev/auc_{}'.format(dev_header[t]).replace(' ', '_'),
+                    summary_dev['auc'][t], summary['step'])
 
             save_best = False
             mean_acc = summary_dev['acc'][cfg.save_index].mean()
