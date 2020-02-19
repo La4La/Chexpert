@@ -125,10 +125,10 @@ def train_epoch(summary, summary_dev, cfg, args, model, dataloader,
 
             for t in range(num_tasks):
                 summary_writer.add_scalar(
-                    'train/loss_{}'.format(label_header[t]), loss_sum[t],
+                    'train/loss_{}'.format(label_header[t]).replace(' ', '_'), loss_sum[t],
                     summary['step'])
                 summary_writer.add_scalar(
-                    'train/acc_{}'.format(label_header[t]), acc_sum[t],
+                    'train/acc_{}'.format(label_header[t]).replace(' ', '_'), acc_sum[t],
                     summary['step'])
 
             loss_sum = np.zeros(num_tasks)
