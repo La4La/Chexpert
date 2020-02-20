@@ -402,13 +402,13 @@ def run(args):
 
         for t in range(len(cfg.num_classes)):
             summary_writer.add_scalar(
-                'dev/loss_{}'.format(dev_header[t]), summary_dev['loss'][t],
+                'dev/loss_{}'.format(dev_header[t]).replace(' ', '_'), summary_dev['loss'][t],
                 summary_train['step'])
             summary_writer.add_scalar(
-                'dev/acc_{}'.format(dev_header[t]), summary_dev['acc'][t],
+                'dev/acc_{}'.format(dev_header[t]).replace(' ', '_'), summary_dev['acc'][t],
                 summary_train['step'])
             summary_writer.add_scalar(
-                'dev/auc_{}'.format(dev_header[t]), summary_dev['auc'][t],
+                'dev/auc_{}'.format(dev_header[t]).replace(' ', '_'), summary_dev['auc'][t],
                 summary_train['step'])
 
         save_best = False
