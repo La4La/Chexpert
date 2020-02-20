@@ -46,6 +46,8 @@ class ImageDataset(Dataset):
                                 value) == '1' and \
                                 self.cfg.enhance_index.count(index) > 0:
                             flg_enhance = True
+                    elif index == 0:
+                        labels.append(self.dict[0].get(value))
                 # labels = ([self.dict.get(n, n) for n in fields[5:]])
                 labels = list(map(int, labels))
                 self._image_paths.append(image_path)
