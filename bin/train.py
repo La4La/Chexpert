@@ -144,9 +144,12 @@ def train_epoch(summary, summary_dev, cfg, args, model, dataloader,
             for i in range(len(cfg.num_classes)):
                 y_pred = predlist[i]
                 y_true = true_list[i]
-                fpr, tpr, thresholds = metrics.roc_curve(
-                    y_true, y_pred, pos_label=1)
-                auc = metrics.auc(fpr, tpr)
+                try:
+                    fpr, tpr, thresholds = metrics.roc_curve(
+                        y_true, y_pred, pos_label=1)
+                    auc = metrics.auc(fpr, tpr)
+                except ValueError:
+                    auc = 0.5
                 auclist.append(auc)
             summary_dev['auc'] = np.array(auclist)
 
@@ -376,9 +379,12 @@ def run(args):
         for i in range(len(cfg.num_classes)):
             y_pred = predlist[i]
             y_true = true_list[i]
-            fpr, tpr, thresholds = metrics.roc_curve(
-                y_true, y_pred, pos_label=1)
-            auc = metrics.auc(fpr, tpr)
+            try:
+                fpr, tpr, thresholds = metrics.roc_curve(
+                    y_true, y_pred, pos_label=1)
+                auc = metrics.auc(fpr, tpr)
+            except ValueError:
+                auc = 0.5
             auclist.append(auc)
         summary_dev['auc'] = np.array(auclist)
 
